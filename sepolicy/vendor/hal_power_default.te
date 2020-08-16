@@ -19,3 +19,6 @@ allow hal_power_default sysfs_kgsl:lnk_file read;
 allow hal_power_default debugfs_easel:dir search;
 allow hal_power_default debugfs_easel:file r_file_perms;
 allow hal_power_default debugfs_rpm:file r_file_perms;
+
+# dt2w
+allow hal_power_default sysfs_tap_to_wake:file rw_file_perms;
