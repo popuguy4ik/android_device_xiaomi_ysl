@@ -55,7 +55,6 @@ Power::Power() :
         mHintManager(nullptr),
         mInteractionHandler(nullptr),
         mSustainedPerfModeOn(false),
-        mCameraStreamingModeOn(false),
         mReady(false) {
 
 mHintManager = HintManager::GetFromJSON(kPowerHalConfigPath);
@@ -70,11 +69,7 @@ mHintManager = HintManager::GetFromJSON(kPowerHalConfigPath);
                             mInteractionHandler = std::make_unique<InteractionHandler>(mHintManager);
                             mInteractionHandler->Init();
                             std::string state = android::base::GetProperty(kPowerHalStateProp, "");
-                            if (state == "CAMERA_STREAMING") {
-                                ALOGI("Initialize with CAMERA_STREAMING on");
-                                mHintManager->DoHint("CAMERA_STREAMING");
-                                mCameraStreamingModeOn = true;
-                            } else if (state ==  "SUSTAINED_PERFORMANCE") {
+                            if (state ==  "SUSTAINED_PERFORMANCE") {
                                 ALOGI("Initialize with SUSTAINED_PERFORMANCE on");
                                 mHintManager->DoHint("SUSTAINED_PERFORMANCE");
                                 mSustainedPerfModeOn = true;
@@ -260,51 +255,6 @@ Return<void> Power::powerHintAsync_1_2(PowerHint_1_2 hint, int32_t data) {
                     mHintManager->EndHint("AUDIO_STREAMING");
                     ALOGD("AUDIO STREAMING OFF");
                 }
-            }
-            break;
-        case PowerHint_1_2::CAMERA_LAUNCH:
-            if (data > 0) {
-                mHintManager->DoHint("CAMERA_LAUNCH", std::chrono::milliseconds(data));
-                ALOGD("CAMERA LAUNCH ON: %d MS, LAUNCH ON: 2500 MS", data);
-                // boosts 2.5s for launching
-                mHintManager->DoHint("LAUNCH", std::chrono::milliseconds(2500));
-            } else if (data == 0) {
-                mHintManager->EndHint("CAMERA_LAUNCH");
-                ALOGD("CAMERA LAUNCH OFF");
-            } else {
-                ALOGE("CAMERA LAUNCH INVALID DATA: %d", data);
-            }
-            break;
-        case PowerHint_1_2::CAMERA_STREAMING:
-            if (data > 0) {
-                mHintManager->DoHint("CAMERA_STREAMING");
-                ALOGD("CAMERA STREAMING ON");
-                if (!android::base::SetProperty(kPowerHalStateProp, "CAMERA_STREAMING")) {
-                    ALOGE("%s: could not set powerHAL state property to CAMERA_STREAMING", __func__);
-                }
-                mCameraStreamingModeOn = true;
-            } else if (data == 0) {
-                mHintManager->EndHint("CAMERA_STREAMING");
-                // Boost 1s for tear down
-                mHintManager->DoHint("CAMERA_LAUNCH", std::chrono::seconds(1));
-                ALOGD("CAMERA STREAMING OFF");
-                if (!android::base::SetProperty(kPowerHalStateProp, "")) {
-                    ALOGE("%s: could not clear powerHAL state property", __func__);
-                }
-                mCameraStreamingModeOn = false;
-            } else {
-                ALOGE("CAMERA STREAMING INVALID DATA: %d", data);
-            }
-            break;
-        case PowerHint_1_2::CAMERA_SHOT:
-            if (data > 0) {
-                mHintManager->DoHint("CAMERA_SHOT", std::chrono::milliseconds(data));
-                ALOGD("CAMERA SHOT ON: %d MS", data);
-            } else if (data == 0) {
-                mHintManager->EndHint("CAMERA_SHOT");
-                ALOGD("CAMERA SHOT OFF");
-            } else {
-                ALOGE("CAMERA SHOT INVALID DATA: %d", data);
             }
             break;
         default:
