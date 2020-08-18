@@ -15,9 +15,9 @@
 //
 
 cc_library_static {
-    name: "libinit_vince",
+    name: "libinit_ysl",
     recovery_available: true,
-    srcs: ["init_vince.cpp"],
+    srcs: ["init_ysl.cpp"],
     include_dirs: [
         "system/core/base/include",
         "system/core/init"
