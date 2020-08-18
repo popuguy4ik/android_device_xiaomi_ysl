@@ -170,8 +170,8 @@ PRODUCT_PACKAGES += \
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
-    android.hardware.drm@1.0-service-lazy \
-    android.hardware.drm@1.2-service-lazy.clearkey
+    android.hardware.drm@1.0-service \
+    android.hardware.drm@1.2-service.clearkey
 
 # Fingerprint
 PRODUCT_PACKAGES += \
@@ -396,7 +396,7 @@ PRODUCT_COPY_FILES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service-lazy \
+    android.hardware.wifi@1.0-service-service \
     libcld80211 \
     libwpa_client \
     hostapd \
