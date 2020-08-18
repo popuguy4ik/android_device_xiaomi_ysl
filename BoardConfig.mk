@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-DEVICE_PATH := device/xiaomi/vince
+DEVICE_PATH := device/xiaomi/ysl
 
 TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
@@ -43,15 +43,16 @@ TARGET_USES_64_BIT_BINDER := true
 TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
 
 # Kernel
-TARGET_KERNEL_CONFIG := vince_defconfig
+TARGET_KERNEL_CONFIG := ysl_defconfig
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci earlycon=msm_hsl_uart,0x78af000 androidboot.usbconfigfs=true loop.max_part=16
 #BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_PAGESIZE :=  2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
-TARGET_KERNEL_SOURCE := kernel/xiaomi/vince
+TARGET_KERNEL_SOURCE := kernel/xiaomi/ysl
 TARGET_KERNEL_VERSION := 4.9
+TARGET_KERNEL_CLANG_VERSION := $(shell sh -c "find prebuilts/clang/host/linux-x86/ -type f -name clang -printf \"%T@ %Tc %p\n\" | sort -n | tail -n1 | sed 's/.*clang-\(.*\)\/bin.*/\1/'")
 
 # ANT
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
@@ -121,7 +122,7 @@ ifeq ($(HOST_OS),linux)
 endif
 
 # Display
-TARGET_SCREEN_DENSITY := 440 
+TARGET_SCREEN_DENSITY := 320 
 TARGET_USES_ION := true
 TARGET_USES_NEW_ION_API :=true
 TARGET_USES_GRALLOC1 := true
@@ -234,4 +235,4 @@ WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Inherit from the proprietary version
--include vendor/xiaomi/vince/BoardConfigVendor.mk
+-include vendor/xiaomi/ysl/BoardConfigVendor.mk
