@@ -375,6 +375,13 @@ on charger
     load_system_props
     start qcom-post-boot
 
+on fs
+    wait /dev/block/platform/soc/7824900.sdhci
+    symlink /dev/block/platform/soc/7824900.sdhci /dev/block/bootdevice
+
+    # Advertise system_as_root
+    setprop ro.build.system_root_image true
+
 service vendor.audio-hal-2-0 /vendor/bin/hw/android.hardware.audio@2.0-service
     override
     class hal
