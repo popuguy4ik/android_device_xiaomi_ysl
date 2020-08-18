@@ -1,5 +1,5 @@
 #
-# system.prop for vince
+# system.prop for sdm625
 #
 
 rild.libpath=/vendor/lib64/libril-qc-qmi-1.so

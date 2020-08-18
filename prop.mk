@@ -1,5 +1,5 @@
 #
-# system.prop for vince
+# system.prop for sdm625
 #
 
 # ART
@@ -248,8 +248,4 @@ wifi.interface=wlan0
 # Wifi-Display
 PRODUCT_PROPERTY_OVERRIDES += \
 persist.sys.wfd.virtual=10
-
-# havocOS maintainer
-PRODUCT_PROPERTY_OVERRIDES += \
-ro.havoc.maintainer=KenHV
 
