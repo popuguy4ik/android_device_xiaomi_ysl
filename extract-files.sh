@@ -25,7 +25,7 @@ fi
 set -e
 
 # Required!
-DEVICE=vince
+DEVICE=ysl
 VENDOR=xiaomi
 
 # Load extract_utils and do some sanity checks
@@ -34,7 +34,7 @@ if [[ ! -d "${MY_DIR}" ]]; then MY_DIR="${PWD}"; fi
 
 ROM_ROOT="${MY_DIR}/../../.."
 
-HELPER="${ROM_ROOT}/vendor/havoc/build/tools/extract_utils.sh"
+HELPER="${ROM_ROOT}/vendor/aosp/build/tools/extract_utils.sh"
 if [ ! -f "${HELPER}" ]; then
     echo "Unable to find helper script at ${HELPER}"
     exit 1
