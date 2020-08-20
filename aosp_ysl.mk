@@ -25,8 +25,10 @@ $(call inherit-product, device/xiaomi/vince/device.mk)
 $(call inherit-product, vendor/aosp/config/common_full_phone.mk)
 
 TARGET_FACE_UNLOCK_SUPPORTED := true
-
 TARGET_SUPPORTS_GOOGLE_RECORDER := true
+TARGET_BOOT_ANIMATION_RES := 1080
+TARGET_GAPPS_ARCH := arm64
+
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := ysl
