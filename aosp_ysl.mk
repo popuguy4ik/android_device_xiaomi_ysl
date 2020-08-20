@@ -24,6 +24,10 @@ $(call inherit-product, device/xiaomi/vince/device.mk)
 # Inherit some common rom stuff.
 $(call inherit-product, vendor/aosp/config/common_full_phone.mk)
 
+TARGET_FACE_UNLOCK_SUPPORTED := true
+
+TARGET_SUPPORTS_GOOGLE_RECORDER := true
+
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := ysl
 PRODUCT_NAME := aosp_ysl
