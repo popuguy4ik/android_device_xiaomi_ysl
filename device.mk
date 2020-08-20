@@ -75,6 +75,11 @@ PRODUCT_COPY_FILES += \
 # Device Properties
 -include $(LOCAL_PATH)/prop.mk
 
+# XiaomiParts/Doze
+PRODUCT_PACKAGES += \
+    XiaomiParts \
+    XiaomiDoze
+    
 # ANT
 PRODUCT_PACKAGES += \
     AntHalService \
