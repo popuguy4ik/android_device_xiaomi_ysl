@@ -25,9 +25,9 @@ $(call inherit-product, device/xiaomi/ysl/device.mk)
 $(call inherit-product, vendor/aosp/config/common_full_phone.mk)
 
 TARGET_FACE_UNLOCK_SUPPORTED := true
-
 TARGET_SUPPORTS_GOOGLE_RECORDER := true
-
+TARGET_GAPPS_ARCH := arm64
+TARGET_BOOT_ANIMATION_RES := 1080
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := ysl
 PRODUCT_NAME := aosp_ysl
